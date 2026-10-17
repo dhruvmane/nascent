@@ -45,7 +45,20 @@ export class ApplicationState {
     loadingBarPercentage = 0;
 
     // user servers
-    servers: SERVER[] = []
+    servers: SERVER[] | SERVER[][] = []
+    selectedServer: SERVER | null = null
+    setSelectedServer(heirarchicalIndex: number, isGroup?: boolean, groupIndex?: number) {
+        // If the selected server is in a group, highlight the group.
+        if (isGroup && groupIndex && Array.isArray(this.servers[heirarchicalIndex])) {
+            this.selectedServer = this.servers[heirarchicalIndex][groupIndex] 
+            return;
+        } 
+
+        // Highlight as normal.
+        if (this.servers && this.servers[heirarchicalIndex] && !Array.isArray(this.servers[heirarchicalIndex])) {
+            this.selectedServer = this.servers[heirarchicalIndex]
+        }
+    }
 }
 
 export const App = new ApplicationState();
