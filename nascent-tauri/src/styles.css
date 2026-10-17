@@ -16,15 +16,16 @@
         @apply flex flex-col;
 
         * {
-            color: white;
             font-family: "Google Sans";
         }
     }
 }
 
 @utility bg-nascent-bg {
-    color: white;
     background-image: var(--gradient-nascent-bg);
+}
+@utility border-dim {
+    @apply border-white/15;
 }
 
 * {
@@ -33,26 +34,26 @@
 
 @font-face {
     font-family: "Barge";
-    src: url("assets/fonts/Barge-Black.otf");  
+    src: url("lib/assets/fonts/Barge-Black.otf");  
 }
 @font-face {
     font-family: "Brunson";
-    src: url("assets/fonts/Brunson.ttf");  
+    src: url("lib/assets/fonts/Brunson.ttf");  
 }
 @font-face {
     font-family: "Brunson Rough";
-    src: url("assets/fonts/Brunson Rough.ttf");  
+    src: url("lib/assets/fonts/Brunson Rough.ttf");  
 }
 @font-face {
     font-family: "Cal Sans";
-    src: url("assets/fonts/CalSans-Regular.ttf");  
+    src: url("lib/assets/fonts/CalSans-Regular.ttf");  
 }
 @font-face {
     font-family: "Google Sans";
-    src: url("assets/fonts/GoogleSans-Medium.ttf");  
+    src: url("lib/assets/fonts/GoogleSans-Medium.ttf");  
 }
 @font-face {
     font-family: "Nexa";
-    src: url("assets/fonts/Nexa-Heavy.ttf");  
+    src: url("lib/assets/fonts/Nexa-Heavy.ttf");  
 }
 
