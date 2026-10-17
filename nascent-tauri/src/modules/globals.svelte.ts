@@ -1,5 +1,6 @@
 // Store Application State for Reactivity
 export class ApplicationState {
+    
     private loadingBarTips = [
         "Welcome to Nascent!",
         "Nascent is heavily inspired by Discord and Fluxer!",
@@ -27,10 +28,20 @@ export class ApplicationState {
 
         const timer = setInterval(() => {
             this.currentLoadingBarTip = this.pickRandomTip();
+
+            // fake loading bar simulator
+            // if (this.loadingBarPercentage < 100) {
+            //      this.loadingBarPercentage += Math.floor(Math.random() * 20);
+            // }
+            
         }, this.loadingBarTipDuration);
 
         return () => clearInterval(timer);
     }
+
+    // Loading Bar Simulate
+    loadingBarPercentage = 0;
+
 }
 
 export const App = new ApplicationState();
