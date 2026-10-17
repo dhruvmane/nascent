@@ -1,0 +1,1 @@
+<main class="size-15 rounded-xl bg-white/10"></main>

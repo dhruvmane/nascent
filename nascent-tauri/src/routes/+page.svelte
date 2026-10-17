@@ -20,7 +20,7 @@
         </div>
 
         <div class="flex flex-1 flex-col items-center gap-2">
-            <a href="/auth/login" class="flex flex-row p-2 bg-white/10 rounded-xl items-center gap-2">
+            <a href="/app" class="flex flex-row p-2 bg-white/10 rounded-xl items-center gap-2">
                 <Icon icon="eos-icons:loading" />
                 <h1>Loading</h1>
             </a>
