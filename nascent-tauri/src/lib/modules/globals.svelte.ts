@@ -30,9 +30,9 @@ export class ApplicationState {
             this.currentLoadingBarTip = this.pickRandomTip();
 
             // fake loading bar simulator
-            // if (this.loadingBarPercentage < 100) {
-            //      this.loadingBarPercentage += Math.floor(Math.random() * 20);
-            // }
+            if (this.loadingBarPercentage < 100) {
+                 this.loadingBarPercentage += Math.floor(Math.random() * 20);
+            }
             
         }, this.loadingBarTipDuration);
 

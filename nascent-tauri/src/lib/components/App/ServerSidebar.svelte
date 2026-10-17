@@ -16,4 +16,5 @@
     <ServerIcon />
     <ServerIcon />
     <ServerIcon />
+    <ServerIcon />
 </main>

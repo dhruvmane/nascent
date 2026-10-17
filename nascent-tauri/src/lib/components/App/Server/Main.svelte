@@ -4,7 +4,7 @@
     import MemberList from '$lib/components/App/Server/MemberList.svelte'
 </script>
 
-<main class="flex w-full h-full">
+<main class="flex w-full">
     <Channels />
     <Content />
     <MemberList />

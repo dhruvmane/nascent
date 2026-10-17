@@ -5,14 +5,14 @@
 </script>
 
 <AppLayout>
-    <div class="min-h-screen text-white flex p-2 gap-2">
+    <div class=" text-white flex px-2 gap-2 h-[90dvh]">
         <!-- SERVERS -->
         <div class="flex flex-col overflow-y-auto">
             <Servers />
         </div>
 
         <!-- SERVER-CONTENT -->
-        <div class="mx-1 rounded-xl bg-white/5 min-h-screen w-full flex-1">
+        <div class="mx-1 rounded-xl bg-white/5 w-full h-[90dvh] flex-1 ">
             <ServerMain />
         </div>
         

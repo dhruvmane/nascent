@@ -7,9 +7,9 @@
     // import TaglineTypography from '$lib/assets/typography/IMPROVED WATCH PARTY EXPERIENCE.svg'
     import Icon from '@iconify/svelte';
     import { onMount } from 'svelte';
-
     // begin loading new loading tips
     onMount(() => App.startLoadingTips());
+    
 </script>
 
 <LoadingLayout>
@@ -32,10 +32,9 @@
             <!-- Loading Bar -->
             <div class="w-100 h-2 bg-white/10 rounded-full overflow-hidden">
                 <div class="rounded-full h-full bg-nascent transition-all duration-300" style="width: {App.loadingBarPercentage}%;">
-
+                    
                 </div>
             </div>
-
 
         </div>
 
