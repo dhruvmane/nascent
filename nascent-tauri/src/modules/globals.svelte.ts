@@ -1,0 +1,36 @@
+// Store Application State for Reactivity
+export class ApplicationState {
+    private loadingBarTips = [
+        "Welcome to Nascent!",
+        "Nascent is heavily inspired by Discord and Fluxer!",
+        "You can have an animated profile and banner, for free!",
+        "Nascent is Open Source, btw!",
+    ]
+    currentLoadingBarTip = $state(this.loadingBarTips[0]);
+    private loadingBarTipDuration = 5000;  // 10 seconds
+    
+    // cycle between new loading tips:
+    private pickRandomTip() {
+        // avoid repeating the same tip back-to-back
+        if (this.loadingBarTips.length < 2) return this.loadingBarTips[0];
+        let tip: string;
+        do {
+            tip = this.loadingBarTips[
+                Math.floor(Math.random() * this.loadingBarTips.length)
+            ];
+        } while (tip === this.currentLoadingBarTip);
+        return tip;
+    }
+
+    startLoadingTips() {
+        this.currentLoadingBarTip = this.pickRandomTip();
+
+        const timer = setInterval(() => {
+            this.currentLoadingBarTip = this.pickRandomTip();
+        }, this.loadingBarTipDuration);
+
+        return () => clearInterval(timer);
+    }
+}
+
+export const App = new ApplicationState();

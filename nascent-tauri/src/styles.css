@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+    --font-ui: "Google Sans";    
+    --color-dark: #1F1F1F;
+    --color-extradark: #0D0C0C;
+    --color-nascent: #C5A7EB;
+    --color-nascent-dark: #39067A;
+    --gradient-nascent-bg: linear-gradient(0deg, #1F1F1F 0%, #0D0C0C 20%);
+}
+
+@layer {
+    .app {
+        @apply w-full min-h-screen;
+        @apply bg-extradark;
+        @apply flex flex-col;
+
+        * {
+            color: white;
+            font-family: "Google Sans";
+        }
+    }
+}
+
+@utility bg-nascent-bg {
+    color: white;
+    background-image: var(--gradient-nascent-bg);
+}
+
+* {
+    scrollbar-width: none;
+}
+
+@font-face {
+    font-family: "Barge";
+    src: url("assets/fonts/Barge-Black.otf");  
+}
+@font-face {
+    font-family: "Brunson";
+    src: url("assets/fonts/Brunson.ttf");  
+}
+@font-face {
+    font-family: "Brunson Rough";
+    src: url("assets/fonts/Brunson Rough.ttf");  
+}
+@font-face {
+    font-family: "Cal Sans";
+    src: url("assets/fonts/CalSans-Regular.ttf");  
+}
+@font-face {
+    font-family: "Google Sans";
+    src: url("assets/fonts/GoogleSans-Medium.ttf");  
+}
+@font-face {
+    font-family: "Nexa";
+    src: url("assets/fonts/Nexa-Heavy.ttf");  
+}
+
