@@ -12,7 +12,7 @@
         </div>
 
         <!-- SERVER-CONTENT -->
-        <div class="mx-1 rounded-xl bg-white/5 w-full h-[90dvh] flex-1 ">
+        <div class="mx-1 rounded-xl bg-white/5 w-full h-full flex-1 ">
             <ServerMain />
         </div>
         

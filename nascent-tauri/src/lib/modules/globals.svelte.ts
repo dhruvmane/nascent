@@ -45,9 +45,12 @@ export class ApplicationState {
     loadingBarPercentage = 0;
 
     // user servers
-    servers: SERVER[] | SERVER[][] = []
-    selectedServer: SERVER | null = null
+    servers: SERVER[] | SERVER[][] = $state([])
+    selectedServer: SERVER | null = $state(null)
+    selectedSidebarButton: "HOME" | "EXPLORE" | "CREATE" | "" = $state("")
     setSelectedServer(heirarchicalIndex: number, isGroup?: boolean, groupIndex?: number) {
+        this.selectedSidebarButton = "";
+            
         // If the selected server is in a group, highlight the group.
         if (isGroup && groupIndex && Array.isArray(this.servers[heirarchicalIndex])) {
             this.selectedServer = this.servers[heirarchicalIndex][groupIndex] 
@@ -58,6 +61,24 @@ export class ApplicationState {
         if (this.servers && this.servers[heirarchicalIndex] && !Array.isArray(this.servers[heirarchicalIndex])) {
             this.selectedServer = this.servers[heirarchicalIndex]
         }
+    }
+
+    createServer() {
+        let template: SERVER = {
+            id: crypto.randomUUID(),
+            channels: [],
+            info: {
+                created_at: new Date().getTime(),
+                members: [],
+                server_name: "My Server",
+                server_owner: crypto.randomUUID(),
+                server_icon: "",
+            }
+        }
+
+        // @ts-ignore: typescript is so annoying.
+        this.servers.push(template)
+        console.log("Created New Server.")
     }
 }
 

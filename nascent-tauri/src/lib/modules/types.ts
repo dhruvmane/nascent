@@ -4,11 +4,11 @@ export interface SERVER {
     info: {
         server_name: string,
         server_owner: string,
-        server_icon: string,
+        server_icon?: string,
         created_at: number,
-        members: USER[],
+        members?: USER[],
     },
-    channels: CHANNEL[],
+    channels?: CHANNEL[],
 }
 
 // USER

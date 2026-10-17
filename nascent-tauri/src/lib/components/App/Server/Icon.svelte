@@ -1,18 +1,38 @@
 <script lang="ts">
     import { App } from "$lib/modules/globals.svelte";
-    let { index } = $props()
+    import placeholderIcon from '$lib/assets/images/placeholder/server.jpg';
+
+    let { server, index } = $props();
+
+    const isSelected = $derived(App.selectedServer?.id === server?.id);
 </script>
 
-<!-- Home Button -->
-<button onclick={() => App.setSelectedServer(index)} class="relative group/home size-10 rounded-xl justify-items-center text-xl hover:bg-nascent/30 duration-300 cursor-pointer bg-nascent/10">
-    {#if App.selectedServer && !Array.isArray(App.servers[index])}
-        {@const server = App.servers[index]}
-        <img class="size-5" src={server.info.server_icon} alt="Home" />
-        <p class="opacity-0 duration-300 group-hover/home:opacity-100 z-10 text-[12px] w-31 p-2 text-center top-1/2 -translate-y-1/2 border border-dim left-12 absolute bg-dark rounded-xl">DMs</p>
-        <div class="
-            {App.selectedServer.id !== App.servers[index].id ? 'opacity-0' : 'opacity-100'} duration-300 group-hover/home:opacity-100 z-10 
-            w-2 {App.selectedServer.id !== App.servers[index].id ? 'h-2' : 'h-full'} 
-            -translate-y-1/2 -left-3.25 top-1/2 absolute bg-white/50 rounded-r-xl">       
-        </div>   
-    {/if}    
-</button>
+{#if server && !Array.isArray(server)}
+    <div class="relative group/server size-10">
+        <!-- active / hover indicator -->
+        <span
+            class="absolute -left-3 top-1/2 -translate-y-1/2 w-2 rounded-r-xl bg-white/50 duration-300
+                   {isSelected ? 'h-full opacity-100' : 'h-2 opacity-0'}
+                   group-hover/server:opacity-100"
+        ></span>
+
+        <button
+            onclick={() => App.setSelectedServer(index)}
+            class="size-full rounded-xl overflow-hidden grid place-items-center bg-nascent/10 hover:bg-nascent/30 duration-300 cursor-pointer"
+        >
+            <img
+                class="size-full object-cover"
+                src={server.info.server_icon || placeholderIcon}
+                alt={server.info.server_name}
+            />
+        </button>
+
+        <!-- tooltip -->
+        <span
+            class="pointer-events-none absolute left-12 top-1/2 -translate-y-1/2 z-10 w-32 p-2 text-center text-[12px]
+                   border border-dim bg-dark rounded-xl opacity-0 duration-300 group-hover/server:opacity-100"
+        >
+            {server.info.server_name}
+        </span>
+    </div>
+{/if}
