@@ -1,3 +1,5 @@
+import type { USER, SERVER, CHANNEL } from './types';
+
 // Store Application State for Reactivity
 export class ApplicationState {
     
@@ -42,6 +44,8 @@ export class ApplicationState {
     // Loading Bar Simulate
     loadingBarPercentage = 0;
 
+    // user servers
+    servers: SERVER[] = []
 }
 
 export const App = new ApplicationState();
