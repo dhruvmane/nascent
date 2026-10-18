@@ -1,5 +1,5 @@
 // SERVER
-export interface SERVER {
+export interface SERVERORGROUP {
     id: string,
     info: {
         server_name: string,
@@ -8,7 +8,9 @@ export interface SERVER {
         created_at: number,
         members?: USER[],
     },
-    channels?: CHANNEL[],
+    channels?: CHANNELORCATEGORY[],
+    isGroup: boolean,
+    groupedServers?: SERVERORGROUP[]         // same interface, but isGroup = false
 }
 
 // USER
@@ -22,19 +24,21 @@ export interface USER {
         banner_url: string,
         createdAt: number,
     },
-    servers: SERVER[] | SERVER[][],
+    servers: SERVERORGROUP[],
 }
 
-export type CHANNEL_TYPE = "CHATTING" | "NOTICE_BOARD" | "STREAMING"
+export type CHANNEL_TYPE = "CHATTING" | "NOTICE_BOARD" | "STREAMING" | ""
 
 // CHANNEL
-export interface CHANNEL {
+export interface CHANNELORCATEGORY {
     id: string,
     guild_id: string,
     info: {
-        channel_name: string,
+        name: string,
         createdAt: number,
         type: CHANNEL_TYPE,
         description: string,
-    }
+    },
+    isCategory: boolean,
+    categoryChannels?: CHANNELORCATEGORY[]          // same interface, but isCategory = false
 }

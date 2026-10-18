@@ -1,5 +1,5 @@
 import { loadConfigFromFile } from 'vite';
-import type { USER, SERVER, CHANNEL, CHANNEL_TYPE } from './types';
+import type { USER, SERVERORGROUP, CHANNELORCATEGORY, CHANNEL_TYPE } from './types';
 
 // Store Application State for Reactivity
 export class ApplicationState {
@@ -75,8 +75,8 @@ export class ApplicationState {
     loadingBarPercentage = 0;
 
     // user servers
-    servers: SERVER[] | SERVER[][] | undefined = $derived(this.activeUserProfile?.servers)
-    selectedServer: SERVER | null = $state(null)
+    servers: SERVERORGROUP[] | undefined = $derived(this.activeUserProfile?.servers)
+    selectedServer: SERVERORGROUP | null = $state(null)
     selectedSidebarButton: "HOME" | "EXPLORE" | "CREATE" | "" = $state("")
     setSelectedServer(heirarchicalIndex: number, isGroup?: boolean, groupIndex?: number) {
         this.selectedSidebarButton = "";
@@ -96,18 +96,43 @@ export class ApplicationState {
     // CREATING A NEW SERVER
     createServer() {
         let templateServerId = crypto.randomUUID()
-        let template: SERVER = {
+        let template: SERVERORGROUP = {
             id: templateServerId,
             channels: [
                 {
                     id: crypto.randomUUID(),
                     guild_id: templateServerId,
                     info: {
-                        channel_name: "this-is-a-channel",
+                        name: "this-is-a-channel",
                         createdAt: new Date().getTime(),
                         type: "STREAMING",
                         description: "This is a description."
-                    }
+                    },
+                    isCategory: false
+                },
+                {
+                    id: crypto.randomUUID(),
+                    guild_id: templateServerId,
+                    info: {
+                        name: "this-is-a-category",
+                        createdAt: new Date().getTime(),
+                        type: "",
+                        description: ""
+                    },
+                    isCategory: true,
+                    categoryChannels: [
+                        {
+                            id: crypto.randomUUID(),
+                            guild_id: templateServerId,
+                            info: {
+                                name: "this-is-a-channel",
+                                createdAt: new Date().getTime(),
+                                type: "CHATTING",
+                                description: "This is a description."
+                            },
+                            isCategory: false
+                        }
+                    ]
                 }
             ],
             info: {
@@ -116,7 +141,8 @@ export class ApplicationState {
                 server_name: "My Server",
                 server_owner: App.activeUserProfile?.id!,
                 server_icon: "",
-            }
+            },
+            isGroup: false
         }
 
         if (!Array.isArray(template)) {
@@ -127,39 +153,9 @@ export class ApplicationState {
         
     }
 
-    selectedChannel: CHANNEL | null = $state(null);
-    setSelectedChannel(channelId: string) {
-        // App.servers looks like [{}, {}, [{}, {}]]
-        // where each {} can be a server, and every sub-array
-        // of {} are "groups".
-
-        App.servers?.forEach((server) => {
-            // handle grouping
-            // here, "server" becomes "group"
-            if (Array.isArray(server)) {
-                const group = server;
-                // in this group, the first {} is information
-                // about the group itself (color / name / icon etc.)
-                // so check if the first {} has channels; if not => its 
-                // group information and not a server, hence skip it.
-                (group.filter((object) => object.channels)).forEach((subServer: SERVER) => {
-                    if (subServer.channels) {
-                        subServer.channels.forEach((channel) => {
-                            if (channel.id === channelId) {
-                                this.selectedChannel = channel;
-                                return;
-                            }
-                        })
-                    }
-                })
-            } else {
-                server.channels?.forEach((channel) => {
-                    if (channel.id === channelId) {
-                        this.selectedChannel = channel
-                    }
-                })
-            }
-        })
+    selectedChannel: CHANNELORCATEGORY | null = $state(null);
+    setSelectedChannel(channel: CHANNELORCATEGORY) {
+        this.selectedChannel = channel;
     }
 
 }
