@@ -1,10 +1,12 @@
 <script>
     import Icon from '@iconify/svelte';
-    import { onMount } from 'svelte';
-
+    import { getCurrentWindow } from '@tauri-apps/api/window';
+    
     // App Navbar takes extra components as props
     // to display from left to right.
     let { components = [] } = $props()
+
+    const appWindow = getCurrentWindow()
     
 </script>
 <div data-tauri-drag-region class="flex sticky top-0 w-full text-white bg-extradark">
@@ -16,15 +18,15 @@
     </div>
     
     <div class="flex">
-        <button class="py-2 px-4 hover:bg-white/10">
+        <button onclick={() => appWindow.minimize()} class="py-2 px-4 hover:bg-white/10">
             <Icon icon="codicon:chrome-minimize"/>
         </button>
 
-        <button class="py-2 px-4 hover:bg-white/10">
+        <button onclick={() => appWindow.toggleMaximize()} class="py-2 px-4 hover:bg-white/10">
             <Icon icon="mdi:checkbox-blank-outline"/>
         </button>
     
-        <button class="py-2 px-4 hover:bg-red-900/90">
+        <button onclick={() => appWindow.close()} class="py-2 px-4 hover:bg-red-900/90">
             <Icon icon="akar-icons:cross"/>
         </button>
     </div>

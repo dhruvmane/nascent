@@ -5,7 +5,7 @@
 </script>
 
 <AppLayout>
-    <div class=" text-white flex px-2 gap-2 h-[90dvh]">
+    <div class=" text-white flex px-2 gap-2 h-[95dvh]">
         <!-- SERVERS -->
         <div class="flex flex-col">
             <Servers />

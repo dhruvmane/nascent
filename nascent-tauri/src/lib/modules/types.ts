@@ -25,6 +25,8 @@ export interface USER {
     servers: SERVER[],
 }
 
+export type CHANNEL_TYPE = "CHATTING" | "NOTICE_BOARD" | "STREAMING"
+
 // CHANNEL
 export interface CHANNEL {
     id: string,
@@ -32,6 +34,6 @@ export interface CHANNEL {
     info: {
         channel_name: string,
         createdAt: number,
-        type: "CHATTING" | "NOTICE_BOARD" | "STREAMING",
+        type: CHANNEL_TYPE,
     }
 }
