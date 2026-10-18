@@ -1,4 +1,4 @@
-import type { USER, SERVER, CHANNEL } from './types';
+import type { USER, SERVER, CHANNEL, CHANNEL_TYPE } from './types';
 
 // Store Application State for Reactivity
 export class ApplicationState {
@@ -64,9 +64,22 @@ export class ApplicationState {
     }
 
     createServer() {
+
+        let templateServerId = crypto.randomUUID()
         let template: SERVER = {
-            id: crypto.randomUUID(),
-            channels: [],
+            id: templateServerId,
+            channels: [
+                {
+                    id: crypto.randomUUID(),
+                    guild_id: templateServerId,
+                    info: {
+                        channel_name: "this-is-a-channel",
+                        createdAt: new Date().getTime(),
+                        type: "STREAMING",
+                        description: "This is a description."
+                    }
+                }
+            ],
             info: {
                 created_at: new Date().getTime(),
                 members: [],
@@ -79,6 +92,41 @@ export class ApplicationState {
         // @ts-ignore: typescript is so annoying.
         this.servers.push(template)
         console.log("Created New Server.")
+    }
+
+    selectedChannel: CHANNEL | null = $state(null);
+    setSelectedChannel(channelId: string) {
+        // App.servers looks like [{}, {}, [{}, {}]]
+        // where each {} can be a server, and every sub-array
+        // of {} are "groups".
+
+        App.servers.forEach((server) => {
+            // handle grouping
+            // here, "server" becomes "group"
+            if (Array.isArray(server)) {
+                const group = server;
+                // in this group, the first {} is information
+                // about the group itself (color / name / icon etc.)
+                // so check if the first {} has channels; if not => its 
+                // group information and not a server, hence skip it.
+                (group.filter((object) => object.channels)).forEach((subServer: SERVER) => {
+                    if (subServer.channels) {
+                        subServer.channels.forEach((channel) => {
+                            if (channel.id === channelId) {
+                                this.selectedChannel = channel;
+                                return;
+                            }
+                        })
+                    }
+                })
+            } else {
+                server.channels?.forEach((channel) => {
+                    if (channel.id === channelId) {
+                        this.selectedChannel = channel
+                    }
+                })
+            }
+        })
     }
 }
 

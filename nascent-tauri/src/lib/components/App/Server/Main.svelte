@@ -20,9 +20,9 @@
             <UserPill />
         </div>
     </div>
-    <div class="flex flex-col">
+    <div class="flex w-full flex-col">
         <ServerNav />
-        <div class="flex flex-row">
+        <div class="flex-1 flex flex-row">
             <Content />
             <MemberList />
         </div>

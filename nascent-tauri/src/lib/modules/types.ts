@@ -35,5 +35,6 @@ export interface CHANNEL {
         channel_name: string,
         createdAt: number,
         type: CHANNEL_TYPE,
+        description: string,
     }
 }
