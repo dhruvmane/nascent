@@ -13,7 +13,7 @@
 </script>
 
 {#if !channel.isCategory}
-    <button onclick={() => App.setSelectedChannel(channel)} class="{App.selectedChannel?.id === channel.id ? 'bg-white/15' : 'bg-none hover:bg-white/10'} w-full cursor-pointer duration-300 opacity-50 flex items-center gap-2 px-2 py-1 rounded">
+    <button onclick={() => App.setSelectedChannel(channel)} class="{App.selectedChannel?.id === channel.id ? 'bg-white/15' : 'bg-none hover:bg-white/10'} w-full cursor-pointer opacity-50 flex items-center gap-2 px-2 py-1 rounded">
         <div class="text-xl">
             <Icon icon={icons[channel.info.type]}/>
         </div>
@@ -30,14 +30,19 @@
     </button>
 {:else}
     <details class="my-3 group">
-        <summary class="flex items-center [&::-webkit-details-marker]:hidden list-none cursor-pointer hover:opacity-100 opacity-50 px-1 content-none text-[12px]">
-            <p class="flex-1">{channel.info.name}</p>
-            <svg class="w-4 h-4 transition-transform -rotate-90 group-open:rotate-0" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M5.5 7.5L10 12l4.5-4.5" stroke="currentColor" stroke-width="2" fill="none"/>
-            </svg>
+        <summary class="flex items-center [&::-webkit-details-marker]:hidden list-none cursor-pointer px-3 my-0.5 content-none text-[12px]">
+            <div class="flex-1 flex items-center gap-1 hover:opacity-100 opacity-50">
+                <p class="">{channel.info.name}</p>
+                <svg class="w-4 h-4 transition-transform -rotate-90 group-open:rotate-0" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M5.5 7.5L10 12l4.5-4.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <button class="cursor-pointer opacity-50 hover:opacity-100 text-[14px]">
+                <Icon icon="akar-icons:plus" />
+            </button>
         </summary>
         {#each channel.categoryChannels as subChannel}
-            <button onclick={() => App.setSelectedChannel(subChannel)} class="{App.selectedChannel?.id === subChannel.id ? 'bg-white/15' : 'bg-none hover:bg-white/10'} w-full cursor-pointer duration-300 opacity-50 flex items-center gap-2 px-2 py-1 rounded">
+            <button onclick={() => App.setSelectedChannel(subChannel)} class="{App.selectedChannel?.id === subChannel.id ? 'bg-white/15' : 'bg-none hover:bg-white/10'} w-full cursor-pointer opacity-50 flex items-center gap-2 px-2 py-1 rounded">
                 <div class="text-xl">
                     <Icon icon={icons[subChannel.info.type]}/>
                 </div>
