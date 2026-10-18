@@ -30,8 +30,13 @@
     </button>
     
 {:else}
-    <details class="my-3">
-        <summary class="cursor-pointer hover:opacity-100 opacity-50 px-1 content-none text-[12px]">{channel.info.name}</summary>
+    <details class="my-3 group">
+        <summary class="flex items-center [&::-webkit-details-marker]:hidden list-none cursor-pointer hover:opacity-100 opacity-50 px-1 content-none text-[12px]">
+            <p class="flex-1">{channel.info.name}</p>
+            <svg class="w-4 h-4 transition-transform -rotate-90 group-open:rotate-0" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M5.5 7.5L10 12l4.5-4.5" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+        </summary>
         {#each channel.categoryChannels as subChannel}
             <button onclick={() => App.setSelectedChannel(subChannel)} class="w-full cursor-pointer duration-300 hover:bg-white/10 opacity-50 flex items-center gap-2 px-2 py-1 rounded">
                 <div class="text-xl">
