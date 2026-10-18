@@ -22,7 +22,7 @@ export interface USER {
         banner_url: string,
         createdAt: number,
     },
-    servers: SERVER[],
+    servers: SERVER[] | SERVER[][],
 }
 
 export type CHANNEL_TYPE = "CHATTING" | "NOTICE_BOARD" | "STREAMING"

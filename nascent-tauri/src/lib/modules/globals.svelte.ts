@@ -1,7 +1,37 @@
+import { loadConfigFromFile } from 'vite';
 import type { USER, SERVER, CHANNEL, CHANNEL_TYPE } from './types';
 
 // Store Application State for Reactivity
 export class ApplicationState {
+    
+    // PROFILES
+    activeUserProfile: USER | null = $state(null)
+    locallySavedUserProfiles : USER[] = $state([])
+    setActiveUserProfile(userId: string): USER {
+        if (this.locallySavedUserProfiles.length === 0) {
+            const userTemplate: USER = {
+                id: crypto.randomUUID(),
+                info: {
+                    avatar_url: "",
+                    banner_url: "",
+                    createdAt: new Date().getTime(),
+                    description: "",
+                    email: "",
+                    username: "barden",
+                },
+                servers: []
+            }
+            this.activeUserProfile = userTemplate
+            return this.activeUserProfile;
+        }
+        // Find from saved profiles and load.
+        this.activeUserProfile = this.locallySavedUserProfiles.find((profile: USER) => profile.id === userId)!
+        return this.activeUserProfile;
+    }
+
+    constructor() {
+        this.setActiveUserProfile("")
+    }
     
     private loadingBarTips = [
         "Welcome to Nascent!",
@@ -45,14 +75,14 @@ export class ApplicationState {
     loadingBarPercentage = 0;
 
     // user servers
-    servers: SERVER[] | SERVER[][] = $state([])
+    servers: SERVER[] | SERVER[][] | undefined = $derived(this.activeUserProfile?.servers)
     selectedServer: SERVER | null = $state(null)
     selectedSidebarButton: "HOME" | "EXPLORE" | "CREATE" | "" = $state("")
     setSelectedServer(heirarchicalIndex: number, isGroup?: boolean, groupIndex?: number) {
         this.selectedSidebarButton = "";
             
         // If the selected server is in a group, highlight the group.
-        if (isGroup && groupIndex && Array.isArray(this.servers[heirarchicalIndex])) {
+        if (isGroup && this.servers && groupIndex && Array.isArray(this.servers[heirarchicalIndex])) {
             this.selectedServer = this.servers[heirarchicalIndex][groupIndex] 
             return;
         } 
@@ -63,8 +93,8 @@ export class ApplicationState {
         }
     }
 
+    // CREATING A NEW SERVER
     createServer() {
-
         let templateServerId = crypto.randomUUID()
         let template: SERVER = {
             id: templateServerId,
@@ -84,14 +114,17 @@ export class ApplicationState {
                 created_at: new Date().getTime(),
                 members: [],
                 server_name: "My Server",
-                server_owner: crypto.randomUUID(),
+                server_owner: App.activeUserProfile?.id!,
                 server_icon: "",
             }
         }
 
-        // @ts-ignore: typescript is so annoying.
-        this.servers.push(template)
+        if (!Array.isArray(template)) {
+            // @ts-ignore
+            this.activeUserProfile?.servers.push(template)
+        }
         console.log("Created New Server.")
+        
     }
 
     selectedChannel: CHANNEL | null = $state(null);
@@ -100,7 +133,7 @@ export class ApplicationState {
         // where each {} can be a server, and every sub-array
         // of {} are "groups".
 
-        App.servers.forEach((server) => {
+        App.servers?.forEach((server) => {
             // handle grouping
             // here, "server" becomes "group"
             if (Array.isArray(server)) {
@@ -128,6 +161,7 @@ export class ApplicationState {
             }
         })
     }
+
 }
 
 export const App = new ApplicationState();

@@ -16,13 +16,15 @@
         <Icon icon={icons[channel.info.type]}/>
     </div>
 
-    <div class="flex-1">
+    <div class="flex-1 text-left">
         <p>{channel.info.channel_name}</p>
     </div>
 
     <!-- Extra Buttons (Invite and Settings for Mods) -->
     <div class="flex items-center">
         <div class="p-1 cursor-pointer hover:bg-black/10 text-xl"><Icon icon="mdi:account-multiple-plus"/></div>
-        <div class="p-1 cursor-pointer hover:bg-black/10 text-xl"><Icon icon="boxicons:cog-filled"/></div>
+        {#if App.selectedServer?.info.server_owner === App.activeUserProfile?.id}
+            <div class="p-1 cursor-pointer hover:bg-black/10 text-xl"><Icon icon="boxicons:cog-filled"/></div>
+        {/if}
     </div>
 </button>
