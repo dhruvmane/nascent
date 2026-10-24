@@ -18,11 +18,13 @@
             <Icon icon="andrsrxn:dot"/>
         </div>
         <p class="text-[14px]">{App.selectedChannel?.info.description}</p>
-        <button onclick={() => App.toggleMemberList()} class="flex items-center ml-auto hover:cursor-pointer hover:text-white text-white/50">
-            <Icon icon="codicon:layout-sidebar-right" />
-        </button>
-        <button onclick={() => App.toggleMemberList()} class="flex items-center ml-auto hover:cursor-pointer hover:text-white text-white/50">
-            <Icon icon="bi:pin-angle-fill" />
-        </button>
+        <div class="flex items-center ml-auto gap-5">
+            <button onclick={() => App.toggleMemberList()} class="hover:cursor-pointer hover:text-white text-white/50">
+                <Icon icon="codicon:layout-sidebar-right" />
+            </button>
+            <button onclick={() => App.toggleMemberList()} class="hover:cursor-pointer hover:text-white text-white/50">
+                <Icon icon="bi:pin-angle-fill" />
+            </button>
+        </div>
     </div>
 </main>
