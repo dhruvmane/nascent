@@ -21,5 +21,8 @@
         <button onclick={() => App.toggleMemberList()} class="flex items-center ml-auto hover:cursor-pointer hover:text-white text-white/50">
             <Icon icon="codicon:layout-sidebar-right" />
         </button>
+        <button onclick={() => App.toggleMemberList()} class="flex items-center ml-auto hover:cursor-pointer hover:text-white text-white/50">
+            <Icon icon="bi:pin-angle-fill" />
+        </button>
     </div>
 </main>

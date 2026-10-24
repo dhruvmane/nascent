@@ -21,13 +21,13 @@
             <UserPill />
         </div>
     </div>
-    <div class="flex w-full flex-row">
-        <div class="flex-1 flex flex-col">
+    <div class="flex w-full flex-col">
             <ServerNav />
+        <div class="flex-1 flex flex-row">
             <Content />
+            {#if !App.isMemberslistHidden}
+                <MemberList />
+            {/if}
         </div>
-        {#if !App.isMemberslistHidden}
-            <MemberList />
-        {/if}
     </div>
 </main>
