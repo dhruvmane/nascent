@@ -154,9 +154,14 @@ export class ApplicationState {
     }
 
     selectedChannel: CHANNELORCATEGORY | null = $state(null);
-    setSelectedChannel(channel: CHANNELORCATEGORY) {
-        this.selectedChannel = channel;
-    }
+  setSelectedChannel(channel: CHANNELORCATEGORY) {
+    this.selectedChannel = channel;
+  }
+
+  isMemberslistHidden = $state(false);
+  toggleMemberList() {
+    this.isMemberslistHidden = !this.isMemberslistHidden;
+  }
 
 }
 

@@ -1,4 +1,5 @@
 <script>
+    import { App } from '$lib/modules/globals.svelte';
     import Channels from '$lib/components/App/Server/Channels.svelte'
     import Content from '$lib/components/App/Server/Content.svelte'
     import MemberList from '$lib/components/App/Server/MemberList.svelte'
@@ -20,11 +21,13 @@
             <UserPill />
         </div>
     </div>
-    <div class="flex w-full flex-col">
-        <ServerNav />
-        <div class="flex-1 flex flex-row">
+    <div class="flex w-full flex-row">
+        <div class="flex-1 flex flex-col">
+            <ServerNav />
             <Content />
-            <MemberList />
         </div>
+        {#if !App.isMemberslistHidden}
+            <MemberList />
+        {/if}
     </div>
 </main>
