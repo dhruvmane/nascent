@@ -3,19 +3,23 @@
     import ServerIcon from '$lib/components/App/Server/Icon.svelte';
     import Icon from '@iconify/svelte';
     import NN from '$lib/assets/typography/NN.svg'
+    import { goto } from '$app/navigation';
 
     // "HOME" | "EXPLORE" | "CREATE"
-    function setButtonWidget(enumString: "HOME" | "EXPLORE" | "CREATE" | ""): void {
+    function setButtonWidget(enumString: "HOME" | "EXPLORE" | "CREATE" | "", href?: string): void {
         App.selectedSidebarButton = enumString;
         // Nullify the selected server display so it doesn't bug out.
         App.selectedServer = null
+        if (href) {
+          goto(href)
+        }
     }
 </script>
 
 <main class="flex flex-col gap-1 rounded-xl w-full">
 
     <!-- Home Button -->
-    <button onclick={() => setButtonWidget("HOME")} class="relative group/home size-10 rounded-xl flex items-center justify-center text-xl hover:bg-nascent/30 duration-300 cursor-pointer bg-nascent/10">
+    <button onclick={() => setButtonWidget("HOME", "/dms")} class="relative group/home size-10 rounded-xl flex items-center justify-center text-xl hover:bg-nascent/30 duration-300 cursor-pointer bg-nascent/10">
         <img class="size-5" src={NN} alt="Home" />
         <p class="pointer-events-none opacity-0 duration-300 group-hover/home:z-10 group-hover/home:opacity-100 z-10 text-[12px] w-31 p-2 text-center flex items-center top-1/2 -translate-y-1/2 border border-dim left-12 absolute bg-dark rounded-xl">DMs</p>
         <div class="
@@ -30,7 +34,7 @@
     {/each}
 
     <div class="flex flex-col gap-1">
-        <button onclick={() => {setButtonWidget("CREATE"); App.createServer()}} class="relative group/create size-10 rounded-xl flex items-center justify-center text-xl hover:bg-red-400/30 duration-300 cursor-pointer bg-red-400/10">
+        <button onclick={() => {setButtonWidget("CREATE", "/app"); App.createServer()}} class="relative group/create size-10 rounded-xl flex items-center justify-center text-xl hover:bg-red-400/30 duration-300 cursor-pointer bg-red-400/10">
             <Icon icon="akar-icons:circle-plus-fill" />
             <p class="pointer-events-none opacity-0 duration-300 group-hover/create:z-10 group-hover/create:opacity-100 z-10 text-[12px] w-31 p-2 text-center top-1/2 -translate-y-1/2 border border-dim left-12 absolute bg-dark rounded-xl">Create New Server</p>
             <div class="

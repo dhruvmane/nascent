@@ -5,7 +5,7 @@
     import MemberList from '$lib/components/App/Server/MemberList.svelte'
     import ServerNav from './ServerNav.svelte';
     import ServerInfo from './ServerInfo.svelte'
-    import UserPill from './UserPill.svelte';
+    import UserPill from '../UserPill.svelte';
 </script>
 
 

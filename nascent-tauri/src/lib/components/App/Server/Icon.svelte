@@ -1,6 +1,7 @@
 <script lang="ts">
     import { App } from "$lib/modules/globals.svelte";
     import placeholderIcon from '$lib/assets/images/placeholder/server.jpg';
+    import { goto } from "$app/navigation";
 
     let { server, index } = $props();
 
@@ -17,7 +18,7 @@
         ></span>
 
         <button
-            onclick={() => App.setSelectedServer(index)}
+            onclick={() => {App.setSelectedServer(index); goto("/home")}}
             class="peer size-full rounded-xl overflow-hidden grid place-items-center bg-nascent/10 hover:bg-nascent/30 duration-300 cursor-pointer"
         >
             <img
