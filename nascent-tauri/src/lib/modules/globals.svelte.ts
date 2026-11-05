@@ -3,7 +3,7 @@ import type { USER, SERVERORGROUP, CHANNELORCATEGORY, CHANNEL_TYPE } from './typ
 
 // Store Application State for Reactivity
 export class ApplicationState {
-  
+
   // PROFILES
     activeUserProfile: USER | null = $state(null)
     locallySavedUserProfiles : USER[] = $state([])

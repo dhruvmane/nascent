@@ -39,6 +39,15 @@ export interface CHANNELORCATEGORY {
         type: CHANNEL_TYPE,
         description: string,
     },
+    messages?: [],
     isCategory: boolean,
     categoryChannels?: CHANNELORCATEGORY[]          // same interface, but isCategory = false
+}
+
+export interface USERMESSAGE {
+  id: string,
+  info: {
+    author: string,
+    timestamp: number,
+  }
 }
